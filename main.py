@@ -56,7 +56,7 @@ class vt100LaTeX():
                 fp=self.de_code(fp+2); # +2 shift escape sequence
                 continue
             elif string[fp]=='\n': print("\\\\", end="")
-            elif string[fp] in '{}[]&': print("\\",end="")
+            elif string[fp] in '{}[]&$%': print("\\",end="")
             print(string[fp], end="")
             fp+=1
 
