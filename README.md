@@ -12,11 +12,19 @@ $ ./vtk100.py <color terminal dump> # which will give you template.tex
 include you template.tex into `*.tex` file and compile
 
 If you have no idea what's suppose to be done run `make`:
+##### * Note: make sure you have texlive installed
 
 ```bash
 $ make
 make [hello|ls]
 ```
+
+to parse other files you can set env variable `FILE`
+
+```bash
+$ FILE=<file> make compile
+```
+
 
 #### Read more
 

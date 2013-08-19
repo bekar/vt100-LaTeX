@@ -25,8 +25,8 @@ class vt100LaTeX():
             if code in [ "", "0" ]: print("}"*self.count, end=""); self.count=0; return  # no code condition ^[[m
             #elif self.flag==0: print("{", end=""); self.flag=1
             tag=int(code)
-            if   self.extend==53: print("bg"+code, end=""); self.extend=0;
-            elif self.extend==43: print("fg"+code, end=""); self.extend=0;
+            if   self.extend==53: print("\\textcolor{red}{", end=""); self.extend=0; self.count+=1
+            elif self.extend==43: print("\\textcolor{green}{", end=""); self.extend=0; self.count+=1
             elif self.extend: self.extend+=tag; return; #2nd skip
             elif tag in [ 38, 48 ]: self.extend=tag; return;
             elif tag > 39: print("\\colorbox{%s}{"%pallet8[tag-40], end=""); self.count+=1
@@ -55,8 +55,11 @@ class vt100LaTeX():
                 pcode=code;
                 fp=self.de_code(fp+2); # +2 shift escape sequence
                 continue
-            elif string[fp]=='\n': print("\\\\", end="")
-            elif string[fp] in '{}[]&$%': print("\\",end="")
+            elif string[fp] == '\n': print("\\\\", end="")
+            elif string[fp] == ' ': spaceflag=1
+            elif string[fp] == '[': print("\\lbrack ",end=""); fp+=1; continue
+            elif string[fp] == ']': print("\\rbrack ",end=""); fp+=1; continue
+            elif string[fp] in '$\{#_^}%&': print("\\",end="")
             print(string[fp], end="")
             fp+=1
 
