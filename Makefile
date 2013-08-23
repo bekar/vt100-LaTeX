@@ -3,9 +3,11 @@ current: default
 default:
 	@echo "make [hello|ls]"
 
-compile: clean
+convert:
 	cat ${FILE} > /tmp/dump.in
 	./main.py /tmp/dump.in > template.tex
+
+compile: clean convert
 	pdflatex main.tex
 
 hello:
